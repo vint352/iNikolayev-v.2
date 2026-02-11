@@ -1,5 +1,4 @@
 let active = true;
-// Content script, image replacer
 chrome.storage.sync.get(
     {
       activate: true,
@@ -7,7 +6,6 @@ chrome.storage.sync.get(
     (items) => {
       active = items.activate;
       if (active) {
-      // iNikolayev
         const self = {
           images: [
             'http://www.livestory.com.ua/images/igor_nikolaev_2.jpg',
@@ -40,7 +38,6 @@ chrome.storage.sync.get(
             'http://i.imgur.com/xQ3UC5q.jpg',
             'http://img.amur.info/res/articles/5985/660x440/873ba345d080159662902f7dcb3635bb.jpg',
           ],
-          // Handles all images on page with an interval of time
           handleImages(lstImgs, time) {
             const siteImages = document.getElementsByTagName('img');
             const siteImagesCount = siteImages.length;
@@ -49,7 +46,6 @@ chrome.storage.sync.get(
               const currentSrc = currentImg.src;
               self.replaceImages(lstImgs, currentImg, currentSrc);
             }
-            // Keep replacing
             if (time > 0) {
               setTimeout(() => {
                 self.handleImages(lstImgs, time);
@@ -57,16 +53,13 @@ chrome.storage.sync.get(
             }
           },
           replaceImages(lstImgs, currentImg, currentSrc) {
-          // Skip if image is already replaced
             if (!lstImgs.includes(currentSrc)) {
               const imageHeight = currentImg.clientHeight;
               const imageWidth = currentImg.clientWidth;
-              // If image loaded
               if (imageHeight > 0 && imageWidth > 0) {
                 self.handleImg(currentImg, lstImgs);
               }
             } else {
-            // Replace image when loaded
               currentImg.onload = () => {
                 if (!lstImgs.includes(currentSrc)) {
                   self.handleImg(currentImg, lstImgs);
@@ -74,14 +67,12 @@ chrome.storage.sync.get(
               };
             }
           },
-          // Replace one image
           handleImg(item, lstImgs) {
             item.onerror = () => {
               self.handleBrokenImg(item, lstImgs);
             };
             self.setRandomImg(item, lstImgs);
           },
-          // Set a random image from lstImgs to item
           setRandomImg(item, lstImgs) {
             const imageWidth = item.clientWidth;
             const imageHeight = item.clientHeight;
@@ -91,20 +82,17 @@ chrome.storage.sync.get(
             item.style.objectPosition = '0 0';
             item.src = lstImgs[Math.floor(Math.random() * lstImgs.length)];
           },
-          // Removed broken image from lstImgs, run handleImg on item
           handleBrokenImg(item, lstImgs) {
             const brokenImage = item.src;
             const index = lstImgs.indexOf(brokenImage);
             if (index > -1) {
               lstImgs.splice(index, 1);
             }
-            _gaq.push(['_trackEvent', brokenImage, 'broken-image']);
             self.setRandomImg(item, lstImgs);
           },
         };
 
         const date = new Date();
-        // 3 September
         if (date.getMonth() === 8 && date.getDate() === 3) {
           self.images = [
             'https://s11.stc.all.kpcdn.net/share/i/12/10431697/inx960x640.jpg',
@@ -131,23 +119,10 @@ chrome.storage.sync.get(
           ];
         }
 
-        // Start when page is load
         document.addEventListener(
             'DOMContentLoaded',
             self.handleImages(self.images, 3000)
         );
-      // end iNikolayev
       }
     }
 );
-const _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-15665299-28']);
-_gaq.push(['_trackPageview']);
-(() => {
-  const ga = document.createElement('script');
-  ga.type = 'text/javascript';
-  ga.async = true;
-  ga.src = 'https://ssl.google-analytics.com/ga.js';
-  const s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(ga, s);
-})();

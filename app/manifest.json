@@ -1,23 +1,37 @@
 {
-	"background": {
-		"scripts": ["inikolayev/bg.js"]
-	},
-	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
-	"content_scripts": [{
-		"js": ["inikolayev/inikolayev.js"],
-		"matches": ["http://*/*", "https://*/*"]
-	}],
-	"default_locale": "ru",
-	"description": "__MSG_appDesc__",
-	"icons": {
-		"128": "inikolayev/logo128.png",
-		"16": "inikolayev/logo16.png"
-	},
-	"manifest_version": 2,
-	"name": "__MSG_appName__",
-	"options_page": "inikolayev/options/options.html",
-	"permissions": ["storage", "tabs", "contextMenus"],
-	"short_name": "__MSG_appName__",
-	"update_url": "https://clients2.google.com/service/update2/crx",
-	"version": "1.1.6"
+  "manifest_version": 3,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.1.6",
+
+  "default_locale": "ru",
+
+  "icons": {
+    "16": "inikolayev/logo16.png",
+    "128": "inikolayev/logo128.png"
+  },
+
+  "permissions": [
+  "storage",
+  "contextMenus",
+  "tabs"
+],
+
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "background": {
+    "service_worker": "inikolayev/bg.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["inikolayev/inikolayev.js"]
+    }
+  ],
+
+  "options_page": "inikolayev/options/options.html"
 }
