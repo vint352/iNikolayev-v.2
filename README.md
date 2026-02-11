@@ -159,10 +159,7 @@ inikolayev-extension/
 - 🐛 Сообщить об ошибке — создайте [Issue](https://github.com/your-username/inikolayev-chrome-extension/issues)  
 - 💡 Предложить улучшение — опишите идею в [Issues](https://github.com/your-username/inikolayev-chrome-extension/issues)  
 - 🔧 Отправить код — сделайте Fork и создайте [Pull Request](https://github.com/your-username/inikolayev-chrome-extension/pulls)  
-- 📸 Добавить фото — отправьте на `inikolayev.chrome@gmail.com`  
 - ⭐ Поставить звезду — это мотивирует продолжать развитие!  
-
-Подробнее: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ---
 
