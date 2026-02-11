@@ -41,8 +41,8 @@
 ### Вариант 1: Из исходников (рекомендуется)
 
 ```bash
-git clone https://github.com/your-username/inikolayev-chrome-extension.git
-cd inikolayev-chrome-extension
+git clone https://github.com/your-username/iNikolayev-v.2.git
+cd iNikolayev-v.2
 ```
 
 1. Откройте `chrome://extensions/`  
